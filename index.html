@@ -56,20 +56,23 @@
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px
+            width: 10px;
+            height: 10px
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg)
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border)
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border-hi)
+            background: var(--muted);
+            border-radius: 5px;
+            border: 2px solid var(--bg-panel)
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--muted)
+            background: var(--accent)
         }
 
         body::after {
@@ -200,7 +203,7 @@
 
         #tkscroll {
             padding-left: 20px;
-            animation: scrollLeft 40s linear infinite;
+            animation: scrollLeft 120s linear infinite;
             font-weight: 500
         }
 
