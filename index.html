@@ -4,25 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description"
-        content="NEXUS – Terminale notizie mondiale in tempo reale. Aggregatore RSS da 14 fonti internazionali con mappa interattiva." />
     <title>NEXUS // TERMINALE NOTIZIE MONDIALE</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
-    <!-- ══════════════════════════════════════════════════════════
-         GOOGLE ADSENSE — sostituisci ca-pub-XXXXXXXXXX con il tuo
-         Publisher ID ricevuto da Google AdSense.
-         ══════════════════════════════════════════════════════════ -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
-        crossorigin="anonymous"></script>
-
     <style>
-        /* ── RESET & ROOT ──────────────────────────────────────── */
         *,
         *::before,
         *::after {
@@ -32,26 +21,21 @@
         }
 
         :root {
-            --bg: #04070f;
-            --bg-panel: #07101c;
-            --bg-hover: #0f1e30;
-            --bg-glass: rgba(7, 16, 28, 0.7);
+            --bg: #060910;
+            --bg-panel: #0a0f18;
+            --bg-hover: #131c2a;
             --border: #162030;
-            --border-hi: #1e3a55;
-            --accent: #00d4ff;
-            --accent2: #00ff9d;
-            --accentw: #5b4bff;
+            --border-hi: #1e3050;
+            --accent: #00c8ff;
+            --accent2: #00ff88;
             --brk: #ff2d4a;
-            --brk-bg: rgba(255, 45, 74, .12);
-            --brk-b: rgba(255, 45, 74, .4);
-            --text: #c0d4e8;
-            --muted: #3d5570;
-            --dim: #1b3050;
+            --brk-bg: rgba(255, 45, 74, .15);
+            --brk-b: rgba(255, 45, 74, .45);
+            --text: #b8cce0;
+            --muted: #3c5070;
+            --dim: #1e3050;
             --bright: #ffffff;
             --font: 'JetBrains Mono', 'Courier New', monospace;
-            --radius: 6px;
-            --glow-a: rgba(0, 212, 255, 0.35);
-            --glow-g: rgba(0, 255, 157, 0.35);
         }
 
         html,
@@ -60,141 +44,144 @@
             background: var(--bg);
             color: var(--text);
             font-family: var(--font);
-            font-size: 11px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.4;
+            overflow: hidden
         }
 
-        /* Scanlines overlay */
-        body::before {
-            content: '';
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-hi)
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--muted)
+        }
+
+        body::after {
+            content: "";
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 200, 255, 0.03) 50%, rgba(0, 0, 0, 0) 50%);
+            background-size: 100% 4px;
             pointer-events: none;
-            z-index: 9999;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .06) 2px, rgba(0, 0, 0, .06) 4px);
-            animation: scan 8s linear infinite;
-            opacity: .4;
+            z-index: 999;
+            opacity: 0.5
         }
 
-        @keyframes scan {
-            0% {
-                background-position: 0 0
-            }
-
-            100% {
-                background-position: 0 100%
-            }
-        }
-
-        /* ── HEADER ─────────────────────────────────────────────── */
+        /* ── HEADER ──────────────────────────────────────────────────────────── */
         #hdr {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 0 16px;
-            height: 42px;
-            background: linear-gradient(90deg, #0a1520 0%, #07101c 100%);
-            border-bottom: 1px solid var(--border-hi);
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 44px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-panel);
             flex-shrink: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 212, 255, .08);
+            white-space: nowrap
         }
 
-        .logo {
-            font-size: 13px;
-            font-weight: 700;
+        #hdr .logo {
             color: var(--accent);
-            letter-spacing: 5px;
-            white-space: nowrap;
-            text-shadow: 0 0 22px var(--glow-a), 0 0 6px rgba(0, 212, 255, .8);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(0, 200, 255, .3)
         }
 
-        .logo span {
-            color: var(--muted);
-            font-weight: 300
+        #hdr .logo span {
+            color: var(--dim)
         }
 
         .vd {
             width: 1px;
-            height: 18px;
+            height: 16px;
             background: var(--border);
-            flex-shrink: 0
+            margin: 0 16px
         }
 
-        .sb {
+        #hdr .sb {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 9px;
-            color: var(--muted)
+            gap: 12px;
+            font-size: 11px;
+            flex-grow: 1
         }
 
         .dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
+            background: var(--muted);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0)
+        }
+
+        .dot.g {
             background: var(--accent2);
-            box-shadow: 0 0 8px var(--accent2), 0 0 16px rgba(0, 255, 157, .4);
-            animation: pulse 2.2s infinite;
+            box-shadow: 0 0 12px var(--accent2)
         }
 
         .dot.r {
             background: var(--brk);
-            box-shadow: 0 0 8px var(--brk), 0 0 16px rgba(255, 45, 74, .4);
+            box-shadow: 0 0 12px var(--brk);
+            animation: pulse 1.5s infinite
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1)
+            0% {
+                opacity: 1
             }
 
             50% {
-                opacity: .3;
-                transform: scale(.7)
+                opacity: 0.3
+            }
+
+            100% {
+                opacity: 1
             }
         }
 
-        #clk {
-            margin-left: auto;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--bright);
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, .3)
-        }
-
         #nxt {
-            font-size: 9px;
-            color: var(--muted);
-            letter-spacing: 1px;
-            margin-left: 8px
+            font-size: 11px;
+            color: var(--muted)
         }
 
-        /* ── BREAKING TICKER ─────────────────────────────────────── */
+        #clk {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--bright);
+            letter-spacing: 2px;
+            margin-left: 20px
+        }
+
+        /* ── BREAKING TICKER ─────────────────────────────────────────────────── */
         #ticker {
             display: none;
             align-items: center;
-            gap: 10px;
-            padding: 0 14px;
-            height: 26px;
-            background: linear-gradient(90deg, rgba(255, 20, 40, .25) 0%, transparent 10%, transparent 90%, rgba(255, 20, 40, .25) 100%);
-            border-bottom: 1px solid var(--brk-b);
-            flex-shrink: 0;
-            font-size: 9px;
-            color: var(--brk);
-            letter-spacing: 2px;
-            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-panel);
+            font-size: 12px;
+            height: 32px;
             overflow: hidden;
-            position: sticky;
-            top: 42px;
-            z-index: 999;
+            white-space: nowrap
         }
 
         #ticker.on {
@@ -202,45 +189,32 @@
         }
 
         .ticker-label {
-            white-space: nowrap;
-            flex-shrink: 0;
-            padding: 2px 8px;
             background: var(--brk);
             color: #fff;
-            border-radius: 3px;
-            animation: blink-bg 1s step-end infinite;
-            font-size: 8px;
-        }
-
-        @keyframes blink-bg {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .6
-            }
+            font-weight: 700;
+            padding: 0 12px;
+            line-height: 32px;
+            letter-spacing: 1px;
+            z-index: 2
         }
 
         #tkscroll {
-            white-space: nowrap;
-            animation: mq 160s linear infinite
+            padding-left: 20px;
+            animation: scrollLeft 40s linear infinite;
+            font-weight: 500
         }
 
         #tkscroll a {
-            color: inherit;
-            text-decoration: none;
-            transition: color .2s
+            color: var(--bright);
+            text-shadow: 0 0 8px rgba(255, 255, 255, .3)
         }
 
         #tkscroll a:hover {
-            color: #fff;
-            text-shadow: 0 0 12px #ff2d4a
+            color: var(--brk);
+            text-decoration: underline
         }
 
-        @keyframes mq {
+        @keyframes scrollLeft {
             0% {
                 transform: translateX(100vw)
             }
@@ -250,402 +224,352 @@
             }
         }
 
-        /* ── SEARCH ROW ──────────────────────────────────────────── */
+        /* ── SEARCH & FILTERS ────────────────────────────────────────────────── */
         #srow {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 6px 16px;
-            background: var(--bg-panel);
+            gap: 16px;
+            padding: 8px 20px;
             border-bottom: 1px solid var(--border);
-            flex-shrink: 0;
+            background: var(--bg);
+            flex-shrink: 0
+        }
+
+        .search-icon {
+            color: var(--muted)
         }
 
         #srch {
-            flex: 1;
+            flex-grow: 1;
             background: transparent;
             border: none;
-            outline: none;
+            color: var(--bright);
             font-family: var(--font);
-            font-size: 11px;
-            color: var(--text);
-            caret-color: var(--accent);
-            letter-spacing: 1px;
+            font-size: 13px;
+            outline: none;
+            padding: 4px 0
         }
 
         #srch::placeholder {
             color: var(--dim)
         }
 
-        #srch:focus {
-            color: var(--bright)
-        }
-
-        .search-icon {
-            color: var(--muted);
-            font-size: 10px;
-            white-space: nowrap
-        }
-
-        #rcount {
-            font-size: 9px;
-            color: var(--muted);
-            white-space: nowrap
-        }
-
         .cat-filters {
             display: flex;
-            gap: 5px;
-            flex-wrap: nowrap;
-            overflow-x: auto
-        }
-
-        .cat-filters::-webkit-scrollbar {
-            display: none
+            gap: 6px
         }
 
         .cf {
-            padding: 2px 8px;
+            background: transparent;
             border: 1px solid var(--border);
-            border-radius: 3px;
-            font-size: 8px;
-            letter-spacing: 1px;
             color: var(--muted);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all .15s;
+            padding: 4px 10px;
+            font-size: 11px;
             font-family: var(--font);
-            background: none;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all .2s
         }
 
-        .cf:hover,
+        .cf:hover {
+            border-color: var(--border-hi);
+            color: var(--text)
+        }
+
         .cf.active {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 212, 255, .08)
+            background: var(--border-hi);
+            color: var(--bright);
+            border-color: var(--accent)
         }
 
-        /* ── MAP ─────────────────────────────────────────────────── */
+        #rcount {
+            font-size: 11px;
+            color: var(--muted);
+            width: 100px;
+            text-align: right
+        }
+
+        /* ── MAP AREA ────────────────────────────────────────────────────────── */
         #mapwrap {
             position: relative;
+            width: 100%;
+            height: 260px;
+            border-bottom: 1px solid var(--border);
             flex-shrink: 0;
-            height: clamp(180px, 32vh, 380px);
-            background: #04070f;
-            border-bottom: 2px solid var(--border-hi);
-            overflow: hidden;
-        }
-
-        #mapwrap::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, .05) 0%, transparent 60%);
-        }
-
-        #worldmap {
-            display: block
+            background: #04070f
         }
 
         #mtt {
             position: absolute;
-            background: rgba(4, 7, 15, .95);
-            border: 1px solid var(--border-hi);
-            padding: 10px 14px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity .15s;
-            max-width: 290px;
-            z-index: 10;
+            transition: opacity .2s;
+            background: rgba(10, 15, 24, .95);
+            border: 1px solid var(--border-hi);
+            padding: 10px;
             border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, .6), 0 0 1px var(--border-hi);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .5);
+            backdrop-filter: blur(4px);
+            z-index: 10;
+            width: 300px
         }
 
-        #mtt .mt-label {
-            font-size: 9px;
+        .mt-label {
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 5px
+            letter-spacing: 1px;
+            margin-bottom: 4px
         }
 
-        #mtt .mt-headline {
-            font-size: 10.5px;
-            color: var(--bright);
-            line-height: 1.5;
-            margin-bottom: 5px
+        .mt-headline {
+            color: #fff;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 6px
         }
 
-        #mtt .mt-time {
-            font-size: 8px;
+        .mt-time {
+            font-size: 10px;
             color: var(--muted)
         }
 
         #map-stats {
             position: absolute;
-            top: 10px;
-            right: 14px;
-            font-size: 9px;
-            color: var(--muted);
-            text-align: right;
+            right: 20px;
+            top: 16px;
             pointer-events: none;
+            text-align: right;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            font-weight: 700;
+            line-height: 1.8
         }
 
-        #map-stats div {
-            margin-bottom: 3px;
-            letter-spacing: 1px
-        }
-
-        /* ── AD SLOT (sopra colonne) ─────────────────────────────── */
+        /* ── ADS ─────────────────────────────────────────────────────────────── */
         #ad-top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-panel);
+            width: 100%;
+            background: #080c14;
             border-bottom: 1px solid var(--border);
-            padding: 4px 0;
-            min-height: 50px;
-            flex-shrink: 0;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+            position: relative
         }
 
-        /* ── AD SIDEBAR ─────────────────────────────────────── */
+        #ad-top::before {
+            content: 'ADVERTISEMENT SLOT';
+            position: absolute;
+            color: var(--dim);
+            font-size: 10px;
+            letter-spacing: 2px
+        }
+
         #ad-side {
             width: 160px;
-            flex-shrink: 0;
-            background: var(--bg-panel);
+            background: #080c14;
             border-left: 1px solid var(--border);
+            position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px 0;
-            gap: 10px;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center
         }
 
-        /* ── MAIN CONTENT AREA ───────────────────────────────────── */
+        #ad-side::before {
+            content: 'AD';
+            position: absolute;
+            color: var(--dim);
+            font-size: 10px;
+            letter-spacing: 2px;
+            transform: rotate(-90deg)
+        }
+
+        /* ── MAIN COLUMNS ────────────────────────────────────────────────────── */
         #main-area {
-            flex: 1;
             display: flex;
-            overflow: hidden;
-            min-height: 0;
+            flex-grow: 1;
+            overflow: hidden
         }
 
         #colwrap {
-            flex: 1;
-            padding: 14px;
-            overflow-y: auto;
-            min-height: 0;
-        }
-
-        #colwrap::-webkit-scrollbar {
-            width: 6px
-        }
-
-        #colwrap::-webkit-scrollbar-track {
-            background: var(--bg)
-        }
-
-        #colwrap::-webkit-scrollbar-thumb {
-            background: var(--border-hi);
-            border-radius: 3px
-        }
-
-        #colwrap::-webkit-scrollbar-thumb:hover {
-            background: var(--accent)
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative
         }
 
         #columns {
             display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            justify-content: flex-start
+            gap: 0;
+            padding: 12px 0 12px 12px;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth
         }
 
-        /* ── COLUMN ──────────────────────────────────────────────── */
         .col {
-            width: 272px;
-            height: 460px;
+            width: 320px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--bg-panel);
-            transition: opacity .3s, border-color .3s, box-shadow .3s;
-            overflow: hidden;
-        }
-
-        .col:hover {
-            border-color: var(--border-hi);
-            box-shadow: 0 0 20px rgba(0, 0, 0, .4)
-        }
-
-        .col.highlighted {
-            border-color: var(--accent);
-            box-shadow: 0 0 16px rgba(0, 212, 255, .15)
+            border-right: 1px solid var(--border);
+            padding-right: 12px;
+            margin-right: 12px;
+            transition: opacity .3s
         }
 
         .col-hdr {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--border);
-            flex-shrink: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, .02) 0%, transparent 100%);
+            align-items: flex-end;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-hi);
+            margin-bottom: 8px;
+            flex-shrink: 0
         }
 
         .col-name {
-            font-size: 9px;
             font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase
+            font-size: 12px;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px
         }
 
         .col-meta {
-            font-size: 7px;
-            color: var(--dim);
-            letter-spacing: 1px;
-            margin-top: 1px
-        }
-
-        .col-cnt {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--muted)
         }
 
+        .col-cnt {
+            font-size: 10px;
+            color: var(--dim);
+            background: var(--bg);
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 1px solid var(--border)
+        }
+
         .col-body {
-            flex: 1;
+            flex-grow: 1;
             overflow-y: auto;
-            padding: 2px 0;
-            scroll-behavior: smooth
+            padding-right: 4px
         }
 
-        .col-body::-webkit-scrollbar {
-            width: 2px
+        .empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--dim);
+            font-size: 11px;
+            letter-spacing: 2px
         }
 
-        .col-body::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 2px
-        }
-
-        /* ── CARD ────────────────────────────────────────────────── */
+        /* ── CARDS ───────────────────────────────────────────────────────────── */
         .card {
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background .12s, border-left .12s;
-            animation: si .25s ease;
             display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        @keyframes si {
-            from {
-                opacity: 0;
-                transform: translateY(-4px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+            border: 1px solid var(--border);
+            background: rgba(10, 15, 24, .4);
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            transition: all .2s;
+            position: relative;
+            overflow: hidden
         }
 
         .card:hover {
+            border-color: var(--border-hi);
             background: var(--bg-hover)
         }
 
         .card.brk {
-            background: var(--brk-bg);
-            border-left: 2px solid var(--brk);
-            border-bottom-color: var(--brk-b);
+            border-color: var(--brk-b);
+            background: var(--brk-bg)
         }
 
         .card.brk:hover {
-            background: rgba(255, 45, 74, .2)
+            border-color: var(--brk);
+            box-shadow: 0 0 16px rgba(255, 45, 74, .2)
         }
 
         .ct {
-            font-size: 8px;
-            color: var(--dim);
-            letter-spacing: 1px;
-            margin-bottom: 3px;
             display: flex;
-            align-items: center;
-            gap: 4px
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--muted);
+            margin-bottom: 6px;
+            align-items: center
         }
 
         .ctag {
-            padding: 0 4px;
+            border: 1px solid;
             border-radius: 2px;
-            font-size: 7px;
-            letter-spacing: 1px;
-            font-weight: 700;
-            text-transform: uppercase;
+            padding: 0 4px;
+            font-size: 9px;
+            text-transform: uppercase
         }
 
         .cc-politica {
-            background: rgba(59, 130, 246, .18);
-            color: #60a5fa
+            color: #facc15;
+            border-color: rgba(250, 204, 21, .3)
         }
 
         .cc-economia {
-            background: rgba(16, 185, 129, .18);
-            color: #34d399
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, .3)
         }
 
         .cc-tecnologia {
-            background: rgba(139, 92, 246, .18);
-            color: #a78bfa
+            color: #a78bfa;
+            border-color: rgba(167, 139, 250, .3)
         }
 
         .cc-scienza {
-            background: rgba(245, 158, 11, .18);
-            color: #fbbf24
+            color: #34d399;
+            border-color: rgba(52, 211, 153, .3)
         }
 
         .cc-mondo {
-            background: rgba(100, 116, 139, .18);
-            color: #94a3b8
+            color: #94a3b8;
+            border-color: rgba(148, 163, 184, .3)
         }
 
         .cc-urgente {
-            background: rgba(255, 45, 74, .28);
-            color: #ff2d4a;
-            animation: blink 1.1s step-end infinite
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: .2
-            }
+            color: var(--brk);
+            border-color: var(--brk);
+            font-weight: 700;
+            background: rgba(255, 45, 74, .1)
         }
 
         .ttl {
-            font-size: 10.5px;
-            font-weight: 700;
             color: var(--bright);
+            font-size: 13px;
+            font-weight: 400;
             line-height: 1.4;
-            margin-bottom: 3px
+            margin-bottom: 6px
         }
 
-        .card.brk .ttl {
-            color: #ffb8c4
+        .brkbdg {
+            display: inline-block;
+            background: var(--brk);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 0 4px;
+            margin-right: 6px;
+            border-radius: 2px;
+            vertical-align: middle
         }
 
         .abs {
-            font-size: 8.5px;
-            color: var(--muted);
-            line-height: 1.55;
+            font-size: 11px;
+            color: var(--text);
+            line-height: 1.5;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -653,69 +577,65 @@
         }
 
         .src-tag {
-            display: inline-block;
-            font-size: 7.5px;
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            font-size: 10px;
             font-weight: 700;
-            margin-top: 4px;
-            letter-spacing: 2px;
-            text-transform: uppercase
+            opacity: 0;
+            transition: opacity .2s
         }
 
-        .brkbdg {
-            display: inline-block;
-            background: var(--brk);
-            color: #fff;
-            font-size: 7px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding: 0 4px;
-            margin-right: 3px;
-            border-radius: 2px;
-            vertical-align: middle;
+        .card:hover .src-tag {
+            opacity: 1
         }
 
-        /* ── FOOTER ──────────────────────────────────────────────── */
+        mark {
+            background: rgba(0, 200, 255, .2);
+            color: var(--bright);
+            padding: 0 2px
+        }
+
+        /* ── FOOTER & MODALS ─────────────────────────────────────────────────── */
         #ftr {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 3px 16px;
-            height: 22px;
-            background: var(--bg-panel);
+            align-items: center;
+            padding: 0 20px;
+            height: 32px;
             border-top: 1px solid var(--border);
-            font-size: 8px;
-            color: var(--dim);
-            letter-spacing: 1px;
+            background: var(--bg-panel);
             flex-shrink: 0;
+            font-size: 10px;
+            color: var(--dim)
         }
 
         .abadge {
-            padding: 1px 6px;
-            border: 1px solid var(--border);
-            border-radius: 2px;
-            color: var(--dim);
+            color: var(--muted);
             cursor: pointer;
-            transition: all .15s;
-            font-family: var(--font);
-            font-size: 8px;
+            transition: color .2s;
             background: none;
+            border: none;
+            font-family: var(--font);
+            font-size: 10px
         }
 
         .abadge:hover {
-            border-color: var(--accent);
-            color: var(--accent)
+            color: var(--bright)
         }
 
-        /* ── MODAL ───────────────────────────────────────────────── */
         #modal {
-            display: none;
             position: fixed;
-            inset: 0;
-            background: rgba(4, 7, 15, .88);
-            z-index: 2000;
-            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .8);
+            backdrop-filter: blur(4px);
+            z-index: 9000;
+            display: none;
             justify-content: center;
-            backdrop-filter: blur(6px);
+            align-items: center
         }
 
         #modal.on {
@@ -724,83 +644,57 @@
 
         .mbox {
             background: var(--bg-panel);
-            border: 1px solid var(--border-hi);
-            padding: 24px 28px;
-            width: 560px;
-            max-width: 94vw;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7), 0 0 1px var(--border-hi);
+            border: 1px solid var(--accent);
+            padding: 24px;
+            box-shadow: 0 0 30px rgba(0, 200, 255, .1);
+            max-width: 500px;
+            width: 90%
         }
 
         .mtitle {
-            font-size: 11px;
-            font-weight: 700;
             color: var(--accent);
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-            padding-bottom: 9px;
-            border-bottom: 1px solid var(--border)
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px
         }
 
         .mtext {
-            font-size: 9.5px;
-            color: var(--muted);
-            line-height: 1.9;
-            margin-bottom: 10px
+            color: var(--text);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 16px
         }
 
         .mcode {
-            background: #00000099;
+            background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 3px;
             padding: 12px;
-            font-size: 9px;
-            color: var(--accent2);
-            line-height: 1.9;
-            white-space: pre;
-            overflow-x: auto;
-            margin-bottom: 10px
+            font-size: 11px;
+            color: var(--bright);
+            margin-bottom: 16px;
+            white-space: pre-wrap;
+            word-break: break-all
         }
 
         .mclose {
-            float: right;
-            background: none;
-            border: 1px solid var(--dim);
-            color: var(--muted);
-            font-family: var(--font);
-            font-size: 9px;
-            padding: 4px 12px;
+            background: transparent;
+            border: 1px solid var(--muted);
+            color: var(--bright);
+            padding: 6px 16px;
             cursor: pointer;
-            letter-spacing: 2px;
-            border-radius: 2px;
-            transition: all .15s
+            font-family: var(--font);
+            transition: all .2s;
+            display: block;
+            width: 100%
         }
 
         .mclose:hover {
-            border-color: var(--accent);
-            color: var(--accent)
+            background: var(--border-hi);
+            border-color: var(--bright)
         }
 
-        .empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 140px;
-            color: var(--dim);
-            font-size: 9px;
-            letter-spacing: 2px;
-            gap: 6px
-        }
-
-        mark {
-            background: rgba(0, 212, 255, .2);
-            color: var(--accent);
-            border-radius: 2px;
-            padding: 0 2px
-        }
-
-        /* ── RESPONSIVE ──────────────────────────────────────────── */
         @media(max-width:600px) {
             #ad-side {
                 display: none
@@ -823,10 +717,7 @@
 </head>
 
 <body>
-    <!-- ── APP SHELL ─────────────────────────────────────────────────────────── -->
     <div id="app" style="display:flex;flex-direction:column;height:100vh;overflow:hidden">
-
-        <!-- HEADER -->
         <div id="hdr">
             <div class="logo">NEXUS <span>//</span> TERMINALE MONDIALE</div>
             <div class="vd"></div>
@@ -841,13 +732,11 @@
             <div id="clk">--:--:--</div>
         </div>
 
-        <!-- BREAKING TICKER -->
         <div id="ticker">
             <span class="ticker-label">⚡ URGENTE</span>
             <div id="tkscroll"></div>
         </div>
 
-        <!-- SEARCH + CATEGORY FILTERS -->
         <div id="srow">
             <span class="search-icon">▶ FILTRA</span>
             <input id="srch" type="text" placeholder="Cerca titoli, testi, categorie…" autocomplete="off"
@@ -863,7 +752,6 @@
             <span id="rcount">caricamento...</span>
         </div>
 
-        <!-- MAP -->
         <div id="mapwrap">
             <canvas id="worldmap"></canvas>
             <div id="mtt">
@@ -879,20 +767,16 @@
             </div>
         </div>
 
-        <!-- ADSENSE — BANNER ORIZZONTALE (728×90 leaderboard) -->
         <div id="ad-top">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="0000000001"
                 data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <!-- MAIN: columns + sidebar ad -->
         <div id="main-area">
             <div id="colwrap">
                 <div id="columns"></div>
             </div>
-
-            <!-- ADSENSE — SIDEBAR (160×600 wide skyscraper) -->
             <div id="ad-side">
                 <ins class="adsbygoogle" style="display:block;width:160px;height:600px"
                     data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="0000000002" data-ad-format="auto"></ins>
@@ -900,7 +784,6 @@
             </div>
         </div>
 
-        <!-- FOOTER -->
         <div id="ftr">
             <div style="display:flex;gap:12px;align-items:center">
                 <span>NEXUS v5.0 — ARCHITETTURA FRONTEND PURA</span>
@@ -924,269 +807,280 @@
     </div>
 
     <script>
-                /* ════════════════════════════════════════════════════════════════════           ════
-           NEXUS v5.0 — Frontend           S Aggregator
-           GitHub Pages compatible: zero server-side d           , CORS proxies only.
-           ════════════════════════════════════════════════        ═══════════════════════════ */
-
-        // ── CORS PROXIES ────────────────────        ────────────────            ───────────────────
+        // ── CORS PROXIES ───────────────────────────────────────────────────────────
         var PROXIES = [
-            { url:            tps://api.allorigins.win/get?url=', type: 'json'                        { url: 'https://corsproxy.io/?', type: 'raw' },
-                    { url: 'https://api.codetabs.com/v1/proxy?quest=', type: 'raw        ' },        
-            { url: 'https://thingproxy.freeboard.io/fetch/', type: 'raw' }
-                ];
+            { url: 'https://api.allorigins.win/get?url=', type: 'json' },
+            { url: 'https://corsproxy.io/?', type: 'raw' },
+            { url: 'https://api.codetabs.com/v1/proxy?quest=', type: 'raw' }
+        ];
 
-                   ── SO ──────── ─────── ───── ────────────── ────────────── ───────
-        var S OURCES =         ansa: { label: 'ANSA', flag: '🇮🇹', color : '#00d4ff', ll: [11.3, 43.8], region: 'Italia', urls: ['ht            //www.ansa.it/sito/a nsait_rss.xml  'htt ps://www.ansa. it/sito/notizi e/mondo/mondo_rss.xml '] },
-     repu bblica: { label: 'Repubblica', flag: '🇮🇹', color: '#3b9            , ll  41.9],  region: 'It ', ur ls: ['https:// www.repubblica .it/rss/homepage/rss2 .0.xml']          rai: { label: 'Rai News', flag: '🇮🇹'            lor: '#5b 6', ll:  [14.3, 40.8 egion : 'Italia', ur ls: ['https:// www.r news.it/rss/tu tti'] },
-     c orriere: { label: 'Corriere', flag: '🇮🇹', color: '#60a            , ll 45.5], r egion: , url s: ['https://x ml2.corriereob jects.it/rss/homepage .xml'] },       bbc: { label: 'BBC', flag: '🇬🇧', color: '#ff4 f7b', ll: [-0.1, 51.5], region: 'Europa', urls: ['https            eed .uk/news /worl , 'ht tps://feeds.bb ci.co.uk/news/ techn ogy/rss.xml']  },
-       : { l abel: 'DW', flag: '🇩🇪', color: '#f97316            l: [6.9, 9], regi on: 'Europa rls:  ['https://rss. dw.com/rdf/rss -en-a '] },
-             lemon bel:  'Le Monde', flag: '🇫🇷', color: '#c084fc'            : [2.3, ], regio n: 'Europa ls: [ 'https://www.l emonde.fr/rss/ une.xml'] },
-             elpai el: ' El Pais', flag: '🇪🇸', color: '#ec4899', ll: [-3.7, 40.4], region: 'Europa', ur            ['h eds.elpa is.com/mrs ages/ ep/site/engl ish.elpais.com /portad a'] },
-             un:   'UN  News', flag: '🌐', color: '#00b894', ll: [-74.0, 40.7], region            loba : ['http s://ne /feed /subscribe/en/ news/all/rss.x ml'] }, 
-            n pr: { label ', fl ag: '🇺🇸', color: '#22d3ee', ll: [-77.0,             ], r Americhe ', urls: ['ht s://f eeds.npr.org/1 001/rss.xml']  },
-            alj: {  label: 'Al Jazeera',  flag: '🇶🇦', color: '#a78bfa', ll: [51.5, 25.3],            ion: Oriente' , urls ://ww w.aljazeera. com/xml/rss/al l.xml  },
-             who: {  WHO',  flag: '🌍', color: '#f43f5e', ll: [6.1, 46.2], region            lobal', : ['http s://www.who.int/rss- feeds/news-eng lish.xml'] },
-              re ddit: {  label: ' ews',  flag: '🇺🇸', color: '#ff4500', ll: [-122.4, 37.7], regi            'Social', urls: ['ht tps://www.red t.com /r/worldnews /top/.rss?t=da y'] },
-            af ricanews: : 'Af ricanews', flag: '🌍', color: '#84cc16'        , ll        : [25.0, -1.0], region: 'Africa', urls: ['https://www.africanews.com/feed/'] }
-                };
-
-        // ── KEYW ORDS ──── ────────── ──────────── ───────────── ───────── ────────── ─────
-         v ar BREAKI NG_KW =  ['breaking',  'urgent', ' urgente', 'ex plosion', 'e splosione' , 'attack',  'attacco ', 'gue rra', 'war ', 'crisis ', 'crisi ', 'eme rgency',  'emerge nza', 'eart hquake', 't erremoto', 'ts        unami', 'hurric            , 'flood', 'coup',  'nucle ar', 'mi ssile',  'killed ', 'dead',  'morti', ' blast',  'shooting', 'e vacuate', ' ceasef ire'];
-         var CAT _KW = {
-                    Tec gia: ['ai',  'tech',  'cyber', ' chip', 'rob ot', 'di gital',  'software ', 'hack ', 'int elligenza', 'i nternet',  'app', ' startup',  'metaverse            crypto'],           S cienza: [ 'climate', ' health' , 'scien ce', ' resear ch', 'stu dy', ' virus', 'can cer', 'spac e', 'nas a', 'en vironment' , 'salute',            ccin', 's io', 'biolog' ],
-             Economi a: ['economy' , 'market ', 'inflati on', 'b ank', 'trade ', 'gdp',  'oil', 'dol lar', 'imf ', 'recession ', 'econ        omi        a', 'borsa', 'e uro', 'fi nanza', 'lavor o'],
-             Politi ca: ['presi dent', 'election ', 'mini ster', 'gover nment' , 'senate',  'congre ss', 'vote',  'd        iplomacy', 'gov e rno', 'elezioni ' , 'premier',  ' parlamento',  ' nato']
+        // ── SOURCES ────────────────────────────────────────────────────────────────
+        var SOURCES = {
+            ansa: { label: 'ANSA', flag: '🇮🇹', color: '#00d4ff', ll: [11.3, 43.8], region: 'Italia', urls: ['https://www.ansa.it/sito/ansait_rss.xml', 'https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml'] },
+            repubblica: { label: 'Repubblica', flag: '🇮🇹', color: '#3b9dff', ll: [12.5, 41.9], region: 'Italia', urls: ['https://www.repubblica.it/rss/homepage/rss2.0.xml'] },
+            rai: { label: 'Rai News', flag: '🇮🇹', color: '#5b92f6', ll: [14.3, 40.8], region: 'Italia', urls: ['https://www.rainews.it/rss/tutti'] },
+            corriere: { label: 'Corriere', flag: '🇮🇹', color: '#60a5fa', ll: [9.2, 45.5], region: 'Italia', urls: ['https://xml2.corriereobjects.it/rss/homepage.xml'] },
+            bbc: { label: 'BBC', flag: '🇬🇧', color: '#ff4f7b', ll: [-0.1, 51.5], region: 'Europa', urls: ['https://feeds.bbci.co.uk/news/world/rss.xml', 'https://feeds.bbci.co.uk/news/technology/rss.xml'] },
+            dw: { label: 'DW', flag: '🇩🇪', color: '#f97316', ll: [6.9, 50.9], region: 'Europa', urls: ['https://rss.dw.com/rdf/rss-en-all'] },
+            lemonde: { label: 'Le Monde', flag: '🇫🇷', color: '#c084fc', ll: [2.3, 48.9], region: 'Europa', urls: ['https://www.lemonde.fr/rss/une.xml'] },
+            elpais: { label: 'El Pais', flag: '🇪🇸', color: '#ec4899', ll: [-3.7, 40.4], region: 'Europa', urls: ['https://feeds.elpais.com/mrss-s/pages/ep/site/english.elpais.com/portada'] },
+            un: { label: 'UN News', flag: '🌐', color: '#00b894', ll: [-74.0, 40.7], region: 'Global', urls: ['https://news.un.org/feed/subscribe/en/news/all/rss.xml'] },
+            npr: { label: 'NPR', flag: '🇺🇸', color: '#22d3ee', ll: [-77.0, 38.9], region: 'Americhe', urls: ['https://feeds.npr.org/1001/rss.xml'] },
+            alj: { label: 'Al Jazeera', flag: '🇶🇦', color: '#a78bfa', ll: [51.5, 25.3], region: 'Medio Oriente', urls: ['https://www.aljazeera.com/xml/rss/all.xml'] },
+            who: { label: 'WHO', flag: '🌍', color: '#f43f5e', ll: [6.1, 46.2], region: 'Global', urls: ['https://www.who.int/rss-feeds/news-english.xml'] },
+            reddit: { label: 'r/WorldNews', flag: '🇺🇸', color: '#ff4500', ll: [-122.4, 37.7], region: 'Social', urls: ['https://www.reddit.com/r/worldnews/top/.rss?t=day'] },
+            africanews: { label: 'Africanews', flag: '🌍', color: '#84cc16', ll: [25.0, -1.0], region: 'Africa', urls: ['https://www.africanews.com/feed/'] }
         };
-        var  C AT_CLS         = { Politica: 'cc-politica', Economia: 'cc-economia', Tecnologia: 'cc-tecnologi        a', Scienza: 'cc-scienza' , Mondo:  '            ondo' ,  Urgen t e:  ' cc-urgente' };
-        v            llA rticles = [], sea r ch Query = '', catFilter =  '',   countdown = 120, cd In t,  ac t iveSource F il            = null;
 
-                /        / ── UTILS ────────── ─ ───── ─ ──────────────────── ─────────────────────────────
-           function detectCa t( ti tle ,         summary) {
-              var t =  (t itle + ' ' + summary).t oLowerCase();
-             for (var c in CA T_KW) { if (CAT_KW[c] .some(function (k) { re turn t.indexOf(k) >= 0;  })) { return c; } }
-             return 'Mo ndo';
-                 }
-        functi o n isb r k( tit le) {  v ar   t  = title. toLow e rCase(); retur n  B REAKING_KW.some( f un ction (k) { return  t.        indexOf(k) >= 0 ;  }); }
-          function stri pHtml(s) { return (s | | '').replace(/<[^>]+ >/g, '') .r        eplace(/&amp;/g,  '& ' ). repl ace(/&lt;/g, '<') .replace(/&gt;/g, '>').replace(/&nbsp;/ g , ' ').replace(/&#039;/g, "'").r eplace( / &quo t;/g,  '"').replace(/\s+/g ,         ' ').trim(); }
-           fun ction hash(s) {  va r  h = 0; for (var i = 0; i < s.length; i++)h = (M a th.imul (31, h ) + s .charCodeA t(i)) |  0; retur n M a th.ab s(h ) ; }
-        fun c tio        n esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replac        e(/>/g, '&gt;'); }
-        func ti            l(text, q)   { i f  (!q) return esc( te x t );  r etur n  esc(t e xt).replace(            RegEx p ('(            q.replace(/[.*+?^$ {}                ]/ g,  ' \\$&') + ')', ' gi'), '<mark>$1</mark>'); }
-        function fmt(iso) {                 ) return  ' --:--'; try {                 ew Date( i so).toLocaleTimeString(                 { hour 1 2: false, hour: '2- di g it', minute:  '2 -digit'                 tch (e) { return '--:- - '; } }
+        var BREAKING_KW = ['breaking', 'urgent', 'urgente', 'explosion', 'esplosione', 'attack', 'attacco', 'guerra', 'war', 'crisis', 'crisi', 'emergency', 'emergenza', 'earthquake', 'terremoto', 'tsunami', 'hurricane', 'flood', 'coup', 'nuclear', 'missile', 'killed', 'dead', 'morti', 'blast', 'shooting', 'evacuate', 'ceasefire'];
+        var CAT_KW = {
+            Tecnologia: ['ai', 'tech', 'cyber', 'chip', 'robot', 'digital', 'software', 'hack', 'intelligenza', 'internet', 'app', 'startup', 'metaverse', 'crypto'],
+            Scienza: ['climate', 'health', 'science', 'research', 'study', 'virus', 'cancer', 'space', 'nasa', 'environment', 'salute', 'vaccin', 'spazio', 'biolog'],
+            Economia: ['economy', 'market', 'inflation', 'bank', 'trade', 'gdp', 'oil', 'dollar', 'imf', 'recession', 'economia', 'borsa', 'euro', 'finanza', 'lavoro'],
+            Politica: ['president', 'election', 'minister', 'government', 'senate', 'congress', 'vote', 'diplomacy', 'governo', 'elezioni', 'premier', 'parlamento', 'nato']
+        };
+        var CAT_CLS = { Politica: 'cc-politica', Economia: 'cc-economia', Tecnologia: 'cc-tecnologia', Scienza: 'cc-scienza', Mondo: 'cc-mondo', Urgente: 'cc-urgente' };
+        var allArticles = [], searchQuery = '', catFilter = '', countdown = 120, cdInt, activeSourceFilter = null;
 
-        // ── RSS F E TCH ─── ─────────── ───                    ────────────── ───── ─ ─────────────
-          functio n fetchWithFallback(url )  {
-             var busted = u rl  + (url . indexOf('?') >= 0 ? '&'  : ' ? ') + '_n c= ' + Date.n o w();
-               v ar i = 0;
-                         tion tryNext()  {
-                               > = PRO XI ES.length) return Pro mi s e. reject(new Error('All  p r ox ies failed'));
-                    var proxy = PROXIES [i ++] ;
-                                   new AbortController();
-                         ar tid = setTimeo ut ( function () { ctr l.ab            );            14000);
-                                return fetch(proxy.url + en codeUR IC            nent(busted) ,  {  sign a l: c            signal })
-                      .then( funct io                { clearTimeout(tid); if (!res.ok) throw new  Erro r(                    s.statu s ); return proxy.type === 'json' ? re s.json().then(functi                    urn d &&  d .contents ? d.contents : ''; }) : res.text(); })                             .then (function (text) {
-                                   f (text &&  ( text.indexOf('<rss') >= 0 ||                         eed') >=  0  || text.indexOf( ' <?xml') >= 0 || tex t .inde                        >=  0)) re tu rn text;
-                                    ow new Erro r ('Not                                      }).catch(function () { return try Ne xt(); });
+        function detectCat(title, summary) {
+            var t = (title + ' ' + summary).toLowerCase();
+            for (var c in CAT_KW) { if (CAT_KW[c].some(function (k) { return t.indexOf(k) >= 0; })) { return c; } }
+            return 'Mondo';
+        }
+        function isbrk(title) { var t = title.toLowerCase(); return BREAKING_KW.some(function (k) { return t.indexOf(k) >= 0; }); }
+        function stripHtml(s) { return (s || '').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim(); }
+        function hash(s) { var h = 0; for (var i = 0; i < s.length; i++)h = (Math.imul(31, h) + s.charCodeAt(i)) | 0; return Math.abs(h); }
+        function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        function hl(text, q) { if (!q) return esc(text); return esc(text).replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>'); }
+        function fmt(iso) { if (!iso) return '--:--'; try { return new Date(iso).toLocaleTimeString('it-IT', { hour12: false, hour: '2-digit', minute: '2-digit' }); } catch (e) { return '--:--'; } }
+
+        function fetchWithFallback(url) {
+            var busted = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_nc=' + Date.now();
+            var i = 0;
+            function tryNext() {
+                if (i >= PROXIES.length) return Promise.reject(new Error('All proxies failed'));
+                var proxy = PROXIES[i++];
+                var ctrl = new AbortController();
+                var tid = setTimeout(function () { ctrl.abort(); }, 14000);
+                return fetch(proxy.url + encodeURIComponent(busted), { signal: ctrl.signal })
+                    .then(function (res) { clearTimeout(tid); if (!res.ok) throw new Error('HTTP ' + res.status); return proxy.type === 'json' ? res.json().then(function (d) { return d && d.contents ? d.contents : ''; }) : res.text(); })
+                    .then(function (text) {
+                        if (text && (text.indexOf('<rss') >= 0 || text.indexOf('<feed') >= 0 || text.indexOf('<?xml') >= 0 || text.indexOf('<channel') >= 0)) return text;
+                        throw new Error('Not XML');
+                    }).catch(function () { return tryNext(); });
             }
-             return tryNex t( );
+            return tryNext();
         }
 
-        functio n  fetchSource(sourceId, sData) {
-                        articles   = [],  s een = {};
-            var pro m ises                        p(functi o n (u                              // 1 .  Try rss2json API first (byp                        fl are prot e ct ions)
-                  return fetch('https://api.rss2json.com/v 1/a pi .jso n ?rss_url=' + encodeURIComp onent(u rl))
-                    .the n(fu n ction(res) { if (!res.ok) th ro                        2json fail ' ); return res.json(); })
-                      .then(function(da ta ) {
-                        i f  (data.status !== 'ok') throw                        json error'); 
-                         da                        ,  14).forE a ch( f unction(i t em) {
-                            var title   = str ipH t m l(                                                    if (!t                        le]) return; 
-                                       en[title] = tru e;
-                                  var  desc = st ripHtm l(item .descript ion  | | item.content);
-                                  var ab s  = desc.substrin g(0,  320);
-                               var  bre                    k(ti                                             articles.pu s h({ id:  s ourc eId  + '             has            tle), source: sourceId, title: title, abst ra c t: abs || 'Leggi  all        a f        onte.', url: item.link, cat: breaking ? 'Urgente' : detectCat(title, abs), publ        ished: item.pubDate | |             Date(). t oISOString(), breaking: breaking                                       }); 
-                      })
-                     .ca t ch(function() {
-                                // 2. Fallback to raw XML v i a fallback proxies
-                                  return fetchWithFallback(url). then ( function (xml) {
-                                      var dom = new DOMParser().parseFromStrin g(xml, 'a pp                /xml');
-                                      var items =  Arr a y. from(dom. que rySelectorAl l('item , entry'));
-                                      items.slice(0,  1 4) .f                    ion (item)  { 
-                                  v a r titleEl = i t em.qu eryS                    le');
-                                     var title = stripHtml (tit                    El .textContent  :  ' ');
-                                  if (!title  || se                    eturn;
-                                    see n [title] =                                                       var descEl = item.querySelector('description')   || item.getEle                    meNS('*', 'description')[0] || item.querySelec t or('summar y ') || item.querySelector('content');
-                                            var                    El ? stripHtml(descEl.textContent) : '';
-                                            r                 ';
-                                   var link E l =  item.querySelector ( 'lin            
-                                                if (linkEl) { if (linkEl.textContent && linkEl.textCo        ntent.trim().ind ex Of            tp') == =  0) link = linkEl .t e xtCont ent.trim( ); el se if  (link El.get Att            te('hr e f')) link = li nk El.getAttrib            'href') ;  }
-                                      var dateEl = item.querySelector('pub D ate'             item.queryS e lec t or('published')   || item.que r ySele c tor ( 'upda                  item.querySelector('date ' );
-                                  var publi s he d  = n e w Date(). to ISOStrin g ();
-                                         if (date E l) { try {  p ublished = new Date(dateEl.textCo n ten t ).toISOStri ng ( ); } catc                }  }
-                                    var  a b s = desc.                g (0, 320);
-                                  var b r eaki n g = isbr k (ti t le);
-                                           artic        les        .push({ id: sourceId +  '-            hash(title), source: sourceId, title: title,   abstract: abs || 'Leggi alla font e.',  u                , cat :  breaking ? '                 : detectCat(title, abs), publishe d :  p ublis                    g : breaking });
-                                     });
+        function fetchSource(sourceId, sData) {
+            var articles = [], seen = {};
+            var promises = sData.urls.map(function (url) {
+                // 1. Try rss2json API first (bypasses most Cloudflare protections)
+                return fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url))
+                    .then(function (res) { if (!res.ok) throw new Error('rss2json fail'); return res.json(); })
+                    .then(function (data) {
+                        if (data.status !== 'ok') throw new Error('rss2json error');
+                        data.items.slice(0, 14).forEach(function (item) {
+                            var title = stripHtml(item.title);
+                            if (!title || seen[title]) return;
+                            seen[title] = true;
+                            var desc = stripHtml(item.description || item.content);
+                            var abs = desc.substring(0, 320);
+                            var breaking = isbrk(title);
+                            articles.push({ id: sourceId + '-' + hash(title), source: sourceId, title: title, abstract: abs || 'Leggi alla fonte.', url: item.link, cat: breaking ? 'Urgente' : detectCat(title, abs), published: item.pubDate || new Date().toISOString(), breaking: breaking });
                         });
-                          }).c a tch ( function (e)   { console                    s ourceId + '] Feed error' ) ; });
-              });
-                     e turn Prom                    i ses).then(function () { return  a rt i cles; });
-                            /  ── MAIN FETCH ────────────────── ─ ── ─ ───────────────────────────────────────
+                    })
+                    .catch(function () {
+                        // 2. Fallback to raw XML via fallback proxies
+                        return fetchWithFallback(url).then(function (xml) {
+                            var dom = new DOMParser().parseFromString(xml, 'application/xml');
+                            var items = Array.from(dom.querySelectorAll('item,entry'));
+                            items.slice(0, 14).forEach(function (item) {
+                                var titleEl = item.querySelector('title');
+                                var title = stripHtml(titleEl ? titleEl.textContent : '');
+                                if (!title || seen[title]) return;
+                                seen[title] = true;
+                                var descEl = item.querySelector('description') || item.getElementsByTagNameNS('*', 'description')[0] || item.querySelector('summary') || item.querySelector('content');
+                                var desc = descEl ? stripHtml(descEl.textContent) : '';
+                                var link = '';
+                                var linkEl = item.querySelector('link');
+                                if (linkEl) { if (linkEl.textContent && linkEl.textContent.trim().indexOf('http') === 0) link = linkEl.textContent.trim(); else if (linkEl.getAttribute('href')) link = linkEl.getAttribute('href'); }
+                                var dateEl = item.querySelector('pubDate') || item.querySelector('published') || item.querySelector('updated') || item.querySelector('date');
+                                var published = new Date().toISOString();
+                                if (dateEl) { try { published = new Date(dateEl.textContent).toISOString(); } catch (e) { } }
+                                var abs = desc.substring(0, 320);
+                                var breaking = isbrk(title);
+                                articles.push({ id: sourceId + '-' + hash(title), source: sourceId, title: title, abstract: abs || 'Leggi alla fonte.', url: link, cat: breaking ? 'Urgente' : detectCat(title, abs), published: published, breaking: breaking });
+                            });
+                        });
+                    }).catch(function (e) { console.warn('[' + sourceId + '] Feed error'); });
+            });
+            return Promise.all(promises).then(function () { return articles; });
+        }
+
         function fetchFeeds() {
-            var dot = document.getEl                    d ot');
-                    dot.style        .an        imation = 'none'; dot. st            backg r ound = '#fff'; dot.style.boxShadow            0 0 18px #fff';
-              do c ument.getElementById('fstat us ') . textContent = 'SINCR ON IZZ AZIO            .';
-               va r  pro            s = Object.keys(SOURCES).map(function  (id)  {                fetchSo u rce(id, SOURCES[id]); });
-                              al lSettl ed(promi                n(functi o n (results) {
-                  v ar fetched = [] ;
-                           esults. f orEach(function (r)  { i f                     = 'fulfill e d' )  fetched  =  fetched.concat(r.value); }); 
-                    i f (fetched.length > 0) {
-                          var seenIds = {}; allArt ic les                    ction (a) {  s eenIds[a.i d]  = tr ue;  });
-                            var fresh =  f etched.fil                tion                eturn  ! seenIds[a.id                                     if (f res h.                    a llArticles = fresh.concat(allArticles).slice(0, 500);
-                      else if (all Art i c les.length === 0 )  allArticles = fetc h ed;
-                               d erFeeds();
-                       doc ume nt.getElement                tatus').textContent = 'IN DIRE T TA';
-                      docu                ElementById('lupdlbl '). t extContent = ' | A GG. ' + new Date(). toL o caleTimeString( 'it-             { h            2: fal s e });
-                        } else {
-                    document.getE l em e ntById('fsta            ).textContent = 'ERRORE – RIPROVO';
-                    }
-                        dot.style.animation = ''; dot.style.backgr o und =   ''; dot.style            Sh ado w  =  '                       });
-        }
-
-        // ── RENDER ────────────                ───────────────────────────────────────────── 
-         function ca rd( a , q) {
-              var src =  S OURCES[a.source] || { label: a.source, flag: '🌐 ' , color: '#8 8 8' };
-             var cc = CAT_CLS[a.cat] || 'cc            do';
-                    var lnk = a.url ? 'href="' + esc(a.url) + '" target="_blan            el            opener noreferrer"' : '';
-            return  ' <a '  +  lnk + ' clas            ard ' + (a.breaking ? 'brk' : '') + '">'
-                      + '<div c l ass=" c t"><span>' +             a.published)         + '        </span><span class="ctag ' + cc + '">' + esc(a.cat || 'Mondo') + '</span></div>        '
-                + '<div class="ttl">' + (a.breaking ? ' <span cl ass = "brkbdg">UR G </span>' : '')  + hl(a.title,  q) +         '</div>'
-                + '<div class="abs">' +  hl(a .a            act || '', q) + '</div>'
-                                    class="src-tag" style="color:' + src.color + '"> ' +   src.flag + ' ' + esc(src.labe l) +                >'
-                  + '</a>';
-        }
-
-                function buildColumns() {
-                    document.getEl            tByI        d('co        lumns').innerHTML = Object.keys(SOURCES).map(function (id) {
-                v        ar s = SOURCES[id] ; 
-                return '<div class="col"  i d="col-' + id + '">'
-                      + '<d iv cl ass ="        col-hdr"><div>'
-                               + ' <div class="col-name"             e="co l or:' + s.color + '"> '  +                  ' ' + esc(s.                 '</div>'
-                    + '<div clas s ="col-meta"                (s .region) +  ' </ d iv>'
-                       +  '<            >' 
-                                    + '<div class="col-cnt" id="cnt-' + id + '">–</div></div>'
-                            +  '<div c lass= "col- body" id="f e ed-'  + id + '">< d iv c        lass="empty"><div sty le=" f ont-size:22p x ;opa c ity : .25"> ◌</ d iv>< d iv> C ARICAM ENT        O...</div></div></d iv                                 + '</div >';
-            }) .j oin(' ');
+            var dot = document.getElementById('ldot');
+            dot.style.animation = 'none'; dot.style.background = '#fff'; dot.style.boxShadow = '0 0 18px #fff';
+            document.getElementById('fstatus').textContent = 'SINCRONIZZAZIONE...';
+            var promises = Object.keys(SOURCES).map(function (id) { return fetchSource(id, SOURCES[id]); });
+            Promise.allSettled(promises).then(function (results) {
+                var fetched = [];
+                results.forEach(function (r) { if (r.status === 'fulfilled') fetched = fetched.concat(r.value); });
+                if (fetched.length > 0) {
+                    var seenIds = {}; allArticles.forEach(function (a) { seenIds[a.id] = true; });
+                    var fresh = fetched.filter(function (a) { return !seenIds[a.id]; });
+                    if (fresh.length > 0) allArticles = fresh.concat(allArticles).slice(0, 500);
+                    else if (allArticles.length === 0) allArticles = fetched;
+                    renderFeeds();
+                    document.getElementById('fstatus').textContent = 'IN DIRETTA';
+                    document.getElementById('lupdlbl').textContent = ' | AGG. ' + new Date().toLocaleTimeString('it-IT', { hour12: false });
+                } else {
+                    document.getElementById('fstatus').textContent = 'ERRORE – RIPROVO';
                 }
-
-        functi o n renderFe eds() {
-              va            = s earchQue r y.toL owe rC ase( ).t ri m() ; 
-              allAr ticles .sort(function (a,  b) { return new  Dat e(b.published ||  0) -  new Date(a.publi sh            | 0 ); });
-                 va r t ot al  =  0, b r kAll = []; 
-             Object.keys(SO URCES).forEach(f unc tion (src) {
-                  var col =  d            en t.getElementBy Id('feed             src);
-                if (! col )                                   var  mi ne = al lArticle                (function   (a) { ret urn  a.source   === src; });
-                   va r vis = mine.f i lter(function (a )  {
-                            var matchQ  = !q | |                     '').toLowerCase().ind exOf(q )                         act || '').toLowerCa                        >= 0 || (a.cat || '') .toL ow e rCase( ) .indexOf(q) >=  0;
-                         var matchCat  = !cat Filter || a.cat === catFi lter;
-                              eturn matchQ && matc                              });
-                  t otal += vis.len                             col.innerHTML   = vis.leng th === 0
-                       ? '<div c                    ><di                "fon            ze:2        2px        ;opacity:.25">◌</di v>            >' + (mine. l engt            = 0 ?   'CARICAMEN T O...'            NESSUN RISULTATO') + '</div></div>'
-                               :  vis.map(func                 { ret u rn card(a, q); } ).join('' );
-                     do                etElemen t ById('cnt-' + src).textCont ent   = vis.length;
-                              e.filter(f u nction (a) { retur n a . breaking; }).forEa ch(f                (a) {   brkAll . p u sh(                              });
-              va r  bn   = brk                th;
-                          nt.getElementById(' bcount').text Co nt e nt = b n  + ' URG E NTI'                      document.get E lementB y Id('m s-brk').textCont e nt  = bn + ' URGENTI                       d                getEl e mentById('ms-total').textConte nt  =  t ot a l  + '                 ';
-            if  (bn >  0 ) {
-                 doc ument.g e tElemen                icker').classList.a dd('on');
-                      doc u men t.getElementById ( 't kscroll').inner                rkAll.m                ion (a) { return '< a href="' + e sc (a .u rl) + ' "  ta rget="_blank" re l ="noopen er noreferrer">                c( a.title)   + '</a>'; }).join('  &nbsp;&nbsp; // / & nb sp ;&nbsp; ' );
-             } else   {
-                 document . getE lementById('tick er                List.remo                ;
-              }
-            docum ent.getElementBy I d('tart c l').t extContent = total + ' ARTICOLI';
-                    d ocum                lementById('rcount '). tex tC on te nt  =  q  ? t             + '         ri        sultati' : total + '   ar ticoli';
-              redrawMap();
-           }
-
-         // ──  FILTERS ─── ───        ───────────────────────        ──────────────────── ── ─ ── ─────── ── ─
-        document . ge tElementById (' srch').a        ddEventListener('input',  function  (             search Q uery = e.target.value;             erFeed s (); });
-          document.querySelec t orA ll('            ).forE a ch(function (b t n) {
-            btn.add E ven tLis            r('click ' , function             
-                doc u ment.qu e ryS e le cto r All('.cf ' ).fo r Each( f u nc t i on  (b) {  b .classList.remov e(' a c ti ve');   }) ;
-                    c a tFilte r   = btn . getAttr ibu te('data-c a t');
-                              .classList.add('active ' );
-                   renderFeeds (); 
-               });
-         } );
-
-                    ── CLOCK & COUNTDOW N                 ── ─────── ─── ────────── ────── ─ ───── ────────── ─
-        fu nction tickClk() {  doc                tE lementB yId ('clk').textCon tent =   new D ate().toLocaleT imeString('i t-IT', { hour12: fa lse   }); }
-        function  s tar                
-                        td            = 120; clearInterval(c dI nt);
-             cd I nt = s e tInte rval(funct ion () {
-                  countd own--;
-                    document.getE lem e ntById('cdn').text Cont        ent         = countdown;
-                         if   (countdown <= 0) { countdown = 120;             hFee d s(); }
-             },   1000);
+                dot.style.animation = ''; dot.style.background = ''; dot.style.boxShadow = '';
+            });
         }
 
-                // ──  W ORLD MAP ────────────────────────────            ─────────────── ─ ───── ────────
-          var ma            vas, mapCtx, mapW, ma p H, geoF eatures = null, pinHit A reas = [                     function project(lon, lat) {            urn [(lon + 1            / 360 * mapW, (90 - lat) / 180 * mapH]; }
+        function card(a, q) {
+            var src = SOURCES[a.source] || { label: a.source, flag: '🌐', color: '#888' };
+            var cc = CAT_CLS[a.cat] || 'cc-mondo';
+            var lnk = a.url ? 'href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer"' : '';
+            return '<a ' + lnk + ' class="card ' + (a.breaking ? 'brk' : '') + '">'
+                + '<div class="ct"><span>' + fmt(a.published) + '</span><span class="ctag ' + cc + '">' + esc(a.cat || 'Mondo') + '</span></div>'
+                + '<div class="ttl">' + (a.breaking ? '<span class="brkbdg">URG</span>' : '') + hl(a.title, q) + '</div>'
+                + '<div class="abs">' + hl(a.abstract || '', q) + '</div>'
+                + '<span class="src-tag" style="color:' + src.color + '">' + src.flag + ' ' + esc(src.label) + '</span>'
+                + '</a>';
+        }
 
-        function drawBase() {                     mapCtx.fi llS t yle = '#04070f';  ma                lRect(0, 0, ma pW, ma p H);
-              mapCtx.strok eStyle = '#0c 1e32'; mapCt x.l                 = 0.4;
-                                 n = -180; lon <= 180; lon += 30) { var x = project(lon, 0)[0]; mapC                        mapCtx.moveTo( x,  0 ); mapCtx.lineTo (x,                        troke(); }
-               for (var  l at = -60; lat <=  90; lat  += 30) { va r y                        t)[1]; mapCtx.b eg i nPat                Ctx.            To(0, y); mapCtx.lineTo(mapW, y); mapCt x.stroke ();  }                     if  ( !geoFeatures) return;
-            g                es.for E ach( f unction (f)  { 
-                   va                 f.geo m etry; if ( ! geom) retu r n;
-                     var pol y s =                 e === ' P olygo n' ? [geom.coordinates] : ge om. t yp e === 'MultiPo l ygon '  ?  g eom. c oor d inat e s :   [];
-                                      rEach( f unction (poly) {
-                               y. forEa ch                    ing)  { 
-                                    tx.begi n Path();
-                           ring.forEach(f unc tion (p t, i                     project(p t [0], pt[                    == 0) mapCtx.moveTo(xy[0], xy[1]); else mapCtx.l i neTo(xy[0], xy[1]); } ) ;
-                          mapC                    ();
-                        mapCtx.fillStyle = ' # 0c1e32';                     );
-                        mapCtx.strokeStyl e  = '#1 a 3a55'; mapCt x .lineWidth = 0.4; mapCtx.s                                     });
+        function buildColumns() {
+            document.getElementById('columns').innerHTML = Object.keys(SOURCES).map(function (id) {
+                var s = SOURCES[id];
+                return '<div class="col" id="col-' + id + '">'
+                    + '<div class="col-hdr"><div>'
+                    + '<div class="col-name" style="color:' + s.color + '">' + s.flag + ' ' + esc(s.label) + '</div>'
+                    + '<div class="col-meta">' + esc(s.region) + '</div>'
+                    + '</div>'
+                    + '<div class="col-cnt" id="cnt-' + id + '">–</div></div>'
+                    + '<div class="col-body" id="feed-' + id + '"><div class="empty"><div style="font-size:22px;opacity:.25">◌</div><div>CARICAMENTO...</div></div></div>'
+                    + '</div>';
+            }).join('');
+        }
+
+        function renderFeeds() {
+            var q = searchQuery.toLowerCase().trim();
+            allArticles.sort(function (a, b) { return new Date(b.published || 0) - new Date(a.published || 0); });
+            var total = 0, brkAll = [];
+            Object.keys(SOURCES).forEach(function (src) {
+                var col = document.getElementById('feed-' + src);
+                if (!col) return;
+                var mine = allArticles.filter(function (a) { return a.source === src; });
+                var vis = mine.filter(function (a) {
+                    var matchQ = !q || (a.title || '').toLowerCase().indexOf(q) >= 0 || (a.abstract || '').toLowerCase().indexOf(q) >= 0 || (a.cat || '').toLowerCase().indexOf(q) >= 0;
+                    var matchCat = !catFilter || a.cat === catFilter;
+                    return matchQ && matchCat;
                 });
+                total += vis.length;
+                col.innerHTML = vis.length === 0
+                    ? '<div class="empty"><div style="font-size:22px;opacity:.25">◌</div><div>' + (mine.length === 0 ? 'CARICAMENTO...' : 'NESSUN RISULTATO') + '</div></div>'
+                    : vis.map(function (a) { return card(a, q); }).join('');
+                document.getElementById('cnt-' + src).textContent = vis.length;
+                mine.filter(function (a) { return a.breaking; }).forEach(function (a) { brkAll.push(a); });
+            });
+            var bn = brkAll.length;
+            document.getElementById('bcount').textContent = bn + ' URGENTI';
+            document.getElementById('ms-brk').textContent = bn + ' URGENTI';
+            document.getElementById('ms-total').textContent = total + ' ARTICOLI';
+            if (bn > 0) {
+                document.getElementById('ticker').classList.add('on');
+                document.getElementById('tkscroll').innerHTML = brkAll.map(function (a) { return '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">⚡ ' + esc(a.title) + '</a>'; }).join(' &nbsp;&nbsp;///&nbsp;&nbsp;');
+            } else {
+                document.getElementById('ticker').classList.remove('on');
+            }
+            document.getElementById('tartcl').textContent = total + ' ARTICOLI';
+            document.getElementById('rcount').textContent = q ? total + ' risultati' : total + ' articoli';
+            redrawMap();
+        }
+
+        document.getElementById('srch').addEventListener('input', function (e) { searchQuery = e.target.value; renderFeeds(); });
+        document.querySelectorAll('.cf').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.cf').forEach(function (b) { b.classList.remove('active'); });
+                catFilter = btn.getAttribute('data-cat');
+                btn.classList.add('active');
+                renderFeeds();
+            });
+        });
+
+        function tickClk() { document.getElementById('clk').textContent = new Date().toLocaleTimeString('it-IT', { hour12: false }); }
+        function startCdn() {
+            countdown = 120; clearInterval(cdInt);
+            cdInt = setInterval(function () {
+                countdown--;
+                document.getElementById('cdn').textContent = countdown;
+                if (countdown <= 0) { countdown = 120; fetchFeeds(); }
+            }, 1000);
+        }
+
+        var mapCanvas, mapCtx, mapW, mapH, geoFeatures = null, pinHitAreas = [];
+        function project(lon, lat) { return [(lon + 180) / 360 * mapW, (90 - lat) / 180 * mapH]; }
+
+        function drawBase() {
+            mapCtx.fillStyle = '#04070f'; mapCtx.fillRect(0, 0, mapW, mapH);
+            mapCtx.strokeStyle = '#0c1e32'; mapCtx.lineWidth = 0.4;
+            for (var lon = -180; lon <= 180; lon += 30) { var x = project(lon, 0)[0]; mapCtx.beginPath(); mapCtx.moveTo(x, 0); mapCtx.lineTo(x, mapH); mapCtx.stroke(); }
+            for (var lat = -60; lat <= 90; lat += 30) { var y = project(0, lat)[1]; mapCtx.beginPath(); mapCtx.moveTo(0, y); mapCtx.lineTo(mapW, y); mapCtx.stroke(); }
+            if (!geoFeatures) return;
+            geoFeatures.forEach(function (f) {
+                var geom = f.geometry; if (!geom) return;
+                var polys = geom.type === 'Polygon' ? [geom.coordinates] : geom.type === 'MultiPolygon' ? geom.coordinates : [];
+                polys.forEach(function (poly) {
+                    poly.forEach(function (ring) {
+                        mapCtx.beginPath();
+                        ring.forEach(function (pt, i) { var xy = project(pt[0], pt[1]); if (i === 0) mapCtx.moveTo(xy[0], xy[1]); else mapCtx.lineTo(xy[0], xy[1]); });
+                        mapCtx.closePath();
+                        mapCtx.fillStyle = '#0c1e32'; mapCtx.fill();
+                        mapCtx.strokeStyle = '#1a3a55'; mapCtx.lineWidth = 0.4; mapCtx.stroke();
+                    });
                 });
-          }
+            });
+        }
 
-        f u nction drawPins() {
-                            Areas  =  [];
-              var  t   = Date.no w () / 600;
-                    Object.keys(S O URC E S) . forEach(fu n cti o n  ( id)   {
-                                    SOURCES[id] ; 
-                 var x y  =  project(s.l l [0],  s .ll[1]                    y[0], y = xy[1]; 
-                  var mine =   allArticles                function  (a) { return a. s ourc e === id; });
-                  var  h            k =             .some(function (a) { return a.breaking;  });
-                   var r = hasBrk ? 7 : 5;
-                   var             e = Math.sin(t + hash(id)) * 0.3 +  0.7;
-                          // Pulse   ring
-                mapCtx.beginPa                pCtx.a r c(x,   y, 14 * pul se ,  0,  M ath.PI * 2);
-                          mapCtx.st r okeStyle =   s.c ol o r + '44';  m apCtx.lin e Widt                apCtx.s t roke( );
-                // Glow
-                    var g   = ma p Ctx . crea t eRa d ialG r adi e nt(x,   y, 0 , x ,  y , r                                  g.addColorStop(0            colo            '77'); g.addColorStop(1, s.color  + '00'); 
-                          mapCtx.be ginPath(                x.arc(x,   y, r + 10, 0, Math.PI * 2); mapCtx.f                 = g ;  mapCtx.fill();
-                   // Dot
-                        mapCtx.be g inPat h(); mapCtx.arc( x , y, r                h.PI * 2); ma            .fil        lSt        yle = s.color; mapCtx.fill( );                          if (hasB rk)  {  ma                inPath(); mapCtx.a r c(x, y                 0, Math.PI * 2); mapCtx.strokeStyle = '#ff2d4a';  map C tx.lineWidth =  1 .5;  mapCtx.stroke(); }
-                 //             l
-                        mapCtx.font = 'bo l d 7p                ace'; mapCtx.fillStyle = s.color + 'c c'; m ap                    (s.lab e l.substring(0, 5), x + r + 3,  y  + 3);                          pi nHitArea                     id, x: x, y: y,   r:  18  }) ; 
-                                  }
+        function drawPins() {
+            pinHitAreas = [];
+            var t = Date.now() / 600;
+            Object.keys(SOURCES).forEach(function (id) {
+                var s = SOURCES[id];
+                var xy = project(s.ll[0], s.ll[1]); var x = xy[0], y = xy[1];
+                var mine = allArticles.filter(function (a) { return a.source === id; });
+                var hasBrk = mine.some(function (a) { return a.breaking; });
+                var r = hasBrk ? 7 : 5;
+                var pulse = Math.sin(t + hash(id)) * 0.3 + 0.7;
+                mapCtx.beginPath(); mapCtx.arc(x, y, 14 * pulse, 0, Math.PI * 2);
+                mapCtx.strokeStyle = s.color + '44'; mapCtx.lineWidth = 1; mapCtx.stroke();
+                var g = mapCtx.createRadialGradient(x, y, 0, x, y, r + 10);
+                g.addColorStop(0, s.color + '77'); g.addColorStop(1, s.color + '00');
+                mapCtx.beginPath(); mapCtx.arc(x, y, r + 10, 0, Math.PI * 2); mapCtx.fillStyle = g; mapCtx.fill();
+                mapCtx.beginPath(); mapCtx.arc(x, y, r, 0, Math.PI * 2); mapCtx.fillStyle = s.color; mapCtx.fill();
+                if (hasBrk) { mapCtx.beginPath(); mapCtx.arc(x, y, r + 2, 0, Math.PI * 2); mapCtx.strokeStyle = '#ff2d4a'; mapCtx.lineWidth = 1.5; mapCtx.stroke(); }
+                mapCtx.font = 'bold 7px monospace'; mapCtx.fillStyle = s.color + 'cc'; mapCtx.fillText(s.label.substring(0, 5), x + r + 3, y + 3);
+                pinHitAreas.push({ id: id, x: x, y: y, r: 18 });
+            });
+        }
 
-        function redrawMap()  { i f ( !mapC                rn;             tx            arRect ( 0, 0, mapW, mapH); drawBase();   draw Pi ns() ; }
+        function redrawMap() { if (!mapCtx) return; mapCtx.clearRect(0, 0, mapW, mapH); drawBase(); drawPins(); }
+        setInterval(function () { if (mapCtx && allArticles.length > 0) redrawMap(); }, 1200);
 
-        // Ani mated  map pulse s
-         setInte rval        (fu        nction () { if (mapCtx && allArticles.length > 0) redrawMap(); }, 1200);
-
-                functio n  d            eTopo(to po                e) {
-             var obj = topo.obj                Name] ;
+        function decodeTopo(topo, objName) {
+            var obj = topo.objects[objName];
             var sc = topo.transform ? topo.transform.scale : [1, 1];
             var tr = topo.transform ? topo.transform.translate : [0, 0];
             var arcs = topo.arcs;
-                              e cArc(idx) { var rev = idx < 0, arc = arcs[rev ? ~idx : idx], x = 0, y = 0; var pts = arc.map(function (d) { x += d[0]; y += d[1]; return [x * sc[0] + tr[0], y * sc[1] + tr[1]]; });                    ?  pts.reverse() : pts; }
+            function decArc(idx) { var rev = idx < 0, arc = arcs[rev ? ~idx : idx], x = 0, y = 0; var pts = arc.map(function (d) { x += d[0]; y += d[1]; return [x * sc[0] + tr[0], y * sc[1] + tr[1]]; }); return rev ? pts.reverse() : pts; }
             function decRing(ring) { var c = []; ring.forEach(function (i) { c = c.concat(decArc(i)); }); return c; }
             function decGeom(g) {
-                         f (            pe === ' Po                return  { type: 'Polygon', coordinates:                 ap(de cRing) };
-                if (g.type === 'MultiPolygon') return { type: 'MultiPolygon'                    s : g.arcs.map(function (p) { return p.map(decRing); }) };
+                if (g.type === 'Polygon') return { type: 'Polygon', coordinates: g.arcs.map(decRing) };
+                if (g.type === 'MultiPolygon') return { type: 'MultiPolygon', coordinates: g.arcs.map(function (p) { return p.map(decRing); }) };
                 return null;
             }
             return (obj.geometries || []).map(function (g) { return { type: 'Feature', geometry: decGeom(g), properties: g.properties || {} }; }).filter(function (f) { return f.geometry; });
@@ -1195,23 +1089,18 @@
         function initMap() {
             var wrap = document.getElementById('mapwrap');
             mapW = wrap.clientWidth; mapH = wrap.clientHeight;
-            mapCanvas = document.getEleme                    d map');
+            mapCanvas = document.getElementById('worldmap');
             mapCanvas.width = mapW; mapCanvas.height = mapH;
             mapCanvas.style.width = '100%'; mapCanvas.style.height = '100%';
             mapCtx = mapCanvas.getContext('2d');
             redrawMap();
             fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-                        .        the        n(function (r) { retu r n r.json(); })
-                .then(function   (topo) { geoFeat ures = decodeTopo(topo, 'countries'); redrawM a p(); })
-                 .catch(function () {
-                    fet ch        ('https://cdn.jsdeliv r .net/npm/world-atlas@2/land-110m.json')
-                                 .then(function (r) { return r.json(); })
-                            . then(func tio n (topo) { geoFeatures = decodeTo po(topo, 'lan d');         redrawMap(); })
-                         .ca tch ( fu nction  ()  { });
-                  });
-                    mapCanvas.addEventListener('mousemove', function (e) {
-                        var rect = m        apCanvas.ge        tBoundingCl        ientRect();
-                         var sx = mapW         / rect.width, pH / rect.height;
+                .then(function (r) { return r.json(); })
+                .then(function (topo) { geoFeatures = decodeTopo(topo, 'countries'); redrawMap(); })
+                .catch(function () { });
+            mapCanvas.addEventListener('mousemove', function (e) {
+                var rect = mapCanvas.getBoundingClientRect();
+                var sx = mapW / rect.width, sy = mapH / rect.height;
                 var mx = (e.clientX - rect.left) * sx, my = (e.clientY - rect.top) * sy;
                 var hit = null; pinHitAreas.forEach(function (p) { if (Math.sqrt((mx - p.x) * (mx - p.x) + (my - p.y) * (my - p.y)) < p.r) hit = p; });
                 var tt = document.getElementById('mtt');
@@ -1262,7 +1151,6 @@
             var el = document.getElementById('col-' + id); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
         }
 
-        // ── MODALS ─────────────────────────────────────────────────────────────────
         var MODALS = {
             sources: {
                 title: 'NEXUS v5.0 — INFO & FONTI',
@@ -1282,7 +1170,6 @@
         document.getElementById('modal').addEventListener('click', function (e) { if (e.target === document.getElementById('modal')) closeModal(); });
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
-        // ── INIT ───────────────────────────────────────────────────────────────────
         buildColumns();
         initMap();
         tickClk();
@@ -1291,3 +1178,5 @@
         startCdn();
     </script>
 </body>
+
+</html>
