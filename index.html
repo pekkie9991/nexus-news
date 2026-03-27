@@ -576,6 +576,7 @@
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical
         }
 
@@ -790,11 +791,14 @@
 
         <div id="ftr">
             <div style="display:flex;gap:12px;align-items:center">
-                <span>NEXUS v5.0 — ARCHITETTURA FRONTEND PURA</span>
+                <span>NEXUS v5.1 — ARCHITETTURA FRONTEND PURA</span>
                 <span>|</span><span id="tartcl">0 ARTICOLI</span>
                 <span id="lupdlbl"></span>
             </div>
-            <div style="display:flex;gap:8px;align-items:center">
+            <div style="display:flex;gap:15px;align-items:center">
+                <button class="abadge" onclick="openModal('about')">[ ? CHI SIAMO ]</button>
+                <button class="abadge" onclick="openModal('privacy')">[ § PRIVACY ]</button>
+                <button class="abadge" onclick="openModal('contact')">[ @ CONTATTI ]</button>
                 <button class="abadge" onclick="openModal('sources')">[ ⚙ INFO FONTI ]</button>
                 <button class="abadge" onclick="openModal('adsense')">[ $ ADSENSE ]</button>
             </div>
@@ -820,6 +824,7 @@
 
         // ── SOURCES ────────────────────────────────────────────────────────────────
         var SOURCES = {
+            editorial: { label: 'EDITORIAL', flag: '✍️', color: '#00ff88', ll: [12.4, 41.8], region: 'NEXUS HQ', urls: [] },
             ansa: { label: 'ANSA', flag: '🇮🇹', color: '#00d4ff', ll: [11.3, 43.8], region: 'Italia', urls: ['https://www.ansa.it/sito/ansait_rss.xml', 'https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml'] },
             repubblica: { label: 'Repubblica', flag: '🇮🇹', color: '#3b9dff', ll: [12.5, 41.9], region: 'Italia', urls: ['https://www.repubblica.it/rss/homepage/rss2.0.xml'] },
             rai: { label: 'Rai News', flag: '🇮🇹', color: '#5b92f6', ll: [14.3, 40.8], region: 'Italia', urls: ['https://www.rainews.it/rss/tutti'] },
@@ -845,6 +850,20 @@
         };
         var CAT_CLS = { Politica: 'cc-politica', Economia: 'cc-economia', Tecnologia: 'cc-tecnologia', Scienza: 'cc-scienza', Mondo: 'cc-mondo', Urgente: 'cc-urgente' };
         var allArticles = [], searchQuery = '', catFilter = '', countdown = 120, cdInt, activeSourceFilter = null;
+
+        // ── EDITORIAL CONTENT (ADD YOUR ORIGINAL ARTICLES HERE) ────────────────────
+        var EDITORIAL_DATA = [
+            {
+                id: 'ed-001',
+                source: 'editorial',
+                title: 'Benvenuti nel nuovo terminale NEXUS News',
+                abstract: 'Iniziamo oggi una nuova fase del progetto NEXUS. Oltre all\'aggregazione automatica, inizieremo a pubblicare analisi originali sull\'impatto delle tecnologie emergenti nella società moderna. Restate sintonizzati per approfondimenti esclusivi.',
+                url: '#',
+                cat: 'Tecnologia',
+                published: new Date().toISOString(),
+                breaking: false
+            }
+        ];
 
         function detectCat(title, summary) {
             var t = (title + ' ' + summary).toLowerCase();
@@ -926,7 +945,10 @@
             var dot = document.getElementById('ldot');
             dot.style.animation = 'none'; dot.style.background = '#fff'; dot.style.boxShadow = '0 0 18px #fff';
             document.getElementById('fstatus').textContent = 'SINCRONIZZAZIONE...';
-            var promises = Object.keys(SOURCES).map(function (id) { return fetchSource(id, SOURCES[id]); });
+            var promises = Object.keys(SOURCES).map(function (id) { 
+                if (id === 'editorial') return Promise.resolve(EDITORIAL_DATA);
+                return fetchSource(id, SOURCES[id]); 
+            });
             Promise.allSettled(promises).then(function (results) {
                 var fetched = [];
                 results.forEach(function (r) { if (r.status === 'fulfilled') fetched = fetched.concat(r.value); });
@@ -1156,8 +1178,20 @@
         }
 
         var MODALS = {
+            about: {
+                title: 'NEXUS NEWS — CHI SIAMO',
+                html: '<p class="mtext"><strong>NEXUS News</strong> è un progetto sperimentale di aggregazione di notizie in tempo reale, ispirato ai terminali cyberpunk.</p><p class="mtext">Il nostro obiettivo è fornire un\'interfaccia pulita e veloce per monitorare i principali avvenimenti mondiali. Rispettiamo i diritti degli editori fornendo link diretti agli articoli originali.</p>'
+            },
+            privacy: {
+                title: 'INFORMATIVA SULLA PRIVACY',
+                html: '<p class="mtext">Ultimo aggiornamento: 27 Marzo 2026</p><p class="mtext"><strong>Google AdSense:</strong> Questo sito utilizza i cookie di Google per pubblicare annunci basati sulle visite degli utenti. Puoi disattivare i cookie visitando le <a href="https://adssettings.google.com/" target="_blank" style="color:var(--accent)">Impostazioni annunci</a>.</p><p class="mtext">Non raccogliamo dati personali identificativi direttamente, se non quelli forniti volontariamente tramite contatti.</p>'
+            },
+            contact: {
+                title: 'CONTATTI',
+                html: '<p class="mtext">Per segnalazioni o richieste:</p><div class="mcode">Email: nexus.terminal@outlook.com\nGitHub: pekkie9991/nexus-news</div>'
+            },
             sources: {
-                title: 'NEXUS v5.0 — INFO & FONTI',
+                title: 'NEXUS v5.1 — INFO & FONTI',
                 html: '<p class="mtext">Aggregatore RSS client-side puro. Zero dipendenze esterne — parsing RSS via <code>DOMParser</code>, mappa via Canvas API. Compatibile con GitHub Pages senza server.</p>'
                     + '<div class="mcode">FONTI (14):\n  ANSA · Repubblica · Corriere · Rai News\n  BBC  · DW · Le Monde · El Pais\n  UN News · NPR · Al Jazeera · WHO\n  r/WorldNews · Africanews</div>'
                     + '<p class="mtext">Aggiornamento automatico ogni 120 secondi. Articoli urgenti evidenziati con ticker scrolling in testa alla pagina. Clicca sui pin sulla mappa per filtrare per fonte.</p>'
